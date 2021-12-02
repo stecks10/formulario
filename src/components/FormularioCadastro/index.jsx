@@ -14,6 +14,7 @@ export function FormularioCadastro({ aoEnviar, validarCPF }) {
       aoEnviar={(e) => {
         e.preventDefault();
         aoEnviar({ nome, sobrenome, cpf, novidades, promocoes });
+        console.log(nome, sobrenome, cpf, novidades, promocoes);
       }}
     >
       <TextField
