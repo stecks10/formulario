@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import { TextField, Button, Switch, FormControlLabel } from '@material-ui/core';
 
-export function FormularioCadastro() {
+export function FormularioCadastro({ onSubmit }) {
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [promocoes, setPromocoes] = useState(true);
+  const [novidades, setNovidades] = useState(true);
+  const [erros, setErros] = useState({ cpf: { valido: true, texto: '' } });
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        console.log(nome, sobrenome);
+        onSubmit({ nome, sobrenome, cpf, novidades, promocoes });
       }}
     >
       <TextField
         value={nome}
         onChange={(e) => {
-          let tmpNome = e.target.value;
-          if (tmpNome.length >= 3) {
-            tmpNome = tmpNome.substr(0, 3);
-          }
-          setNome(tmpNome);
+          setNome(e.target.value);
         }}
         id="nome"
         label="Nome"
@@ -39,6 +39,17 @@ export function FormularioCadastro() {
         margin="normal"
       />
       <TextField
+        value={cpf}
+        onChange={(e) => {
+          setCpf(e.target.value);
+        }}
+        onBlur={(e) => {
+          setErros({
+            cpf: { valido: false, texto: 'CPF deve ter 11 digitos' },
+          });
+        }}
+        error={!erros.cpf.valido}
+        helperText={erros.cpf.texto}
         id="cpf"
         label="CPF"
         variant="outlined"
@@ -48,12 +59,30 @@ export function FormularioCadastro() {
 
       <FormControlLabel
         label="Promoções"
-        control={<Switch name="Promoções" defaultChecked color="primary" />}
+        control={
+          <Switch
+            checked={promocoes}
+            onChange={(e) => {
+              setPromocoes(e.target.checked);
+            }}
+            name="Promoções"
+            color="primary"
+          />
+        }
       />
 
       <FormControlLabel
         label="Novidades"
-        control={<Switch name="Promoções" defaultChecked color="primary" />}
+        control={
+          <Switch
+            checked={novidades}
+            onChange={(e) => {
+              setNovidades(e.target.checked);
+            }}
+            name="Novidades"
+            color="primary"
+          />
+        }
       />
 
       <Button variant="contained" color="primary" type="submit">
