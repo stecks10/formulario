@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Switch, FormControlLabel } from '@material-ui/core';
 
-export function FormularioCadastro({ onSubmit }) {
+export function FormularioCadastro({ aoEnviar, validarCPF }) {
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
   const [cpf, setCpf] = useState('');
@@ -11,9 +11,9 @@ export function FormularioCadastro({ onSubmit }) {
 
   return (
     <form
-      onSubmit={(e) => {
+      aoEnviar={(e) => {
         e.preventDefault();
-        onSubmit({ nome, sobrenome, cpf, novidades, promocoes });
+        aoEnviar({ nome, sobrenome, cpf, novidades, promocoes });
       }}
     >
       <TextField
@@ -44,8 +44,9 @@ export function FormularioCadastro({ onSubmit }) {
           setCpf(e.target.value);
         }}
         onBlur={(e) => {
+          const ehValido = validarCPF(cpf);
           setErros({
-            cpf: { valido: false, texto: 'CPF deve ter 11 digitos' },
+            cpf: ehValido,
           });
         }}
         error={!erros.cpf.valido}
