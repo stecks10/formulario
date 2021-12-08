@@ -19,7 +19,7 @@ export function DadosUsuario() {
         margin="normal"
         fullWidth
       />
-      <Button type="submit" variant="contained">
+      <Button type="submit" variant="contained" color="primary">
         Cadastrar
       </Button>
     </form>
