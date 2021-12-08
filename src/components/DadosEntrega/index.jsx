@@ -1,10 +1,25 @@
 import { Button, TextField } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 
-export function DadosEntrega() {
+export function DadosEntrega({ aoEnviar }) {
+  const [cep, setCep] = useState('');
+  const [endereco, setEndereco] = useState('');
+  const [numero, setNumero] = useState('');
+  const [estado, setEstado] = useState('');
+  const [cidade, setCidade] = useState('');
+
   return (
-    <form>
+    <form
+      aoEnviar={(e) => {
+        e.preventDefault();
+        aoEnviar({ cep, endereco, numero, estado, cidade });
+      }}
+    >
       <TextField
+        value={cep}
+        onChange={(e) => {
+          setCep(e.target.value);
+        }}
         id="cep"
         label="cep"
         type="number"
@@ -12,7 +27,11 @@ export function DadosEntrega() {
         margin="normal"
       />
       <TextField
-        id="endereço"
+        value={endereco}
+        onChange={(e) => {
+          setEndereco(e.target.value);
+        }}
+        id="endereco"
         label="Endereço"
         type="text"
         variant="outlined"
@@ -20,6 +39,10 @@ export function DadosEntrega() {
         fullWidth
       />
       <TextField
+        value={numero}
+        onChange={(e) => {
+          setNumero(e.target.value);
+        }}
         id="numero"
         label="Numero"
         type="number"
@@ -27,6 +50,10 @@ export function DadosEntrega() {
         margin="normal"
       />
       <TextField
+        value={estado}
+        onChange={(e) => {
+          setEstado(e.target.value);
+        }}
         id="estado"
         label="Estado"
         type="text"
@@ -34,6 +61,10 @@ export function DadosEntrega() {
         margin="normal"
       />
       <TextField
+        value={cidade}
+        onChange={(e) => {
+          setCidade(e.target.value);
+        }}
         id="cidade"
         label="Cidade"
         type="text"
