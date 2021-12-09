@@ -11,52 +11,49 @@ export function DadosPessoais({ aoEnviar, validarCPF }) {
 
   return (
     <form
-      aoEnviar={(e) => {
-        e.preventDefault();
+      onSubmit={(event) => {
+        event.preventDefault();
         aoEnviar({ nome, sobrenome, cpf, novidades, promocoes });
-        console.log(nome, sobrenome, cpf, novidades, promocoes);
       }}
     >
       <TextField
         value={nome}
-        onChange={(e) => {
-          setNome(e.target.value);
+        onChange={(event) => {
+          setNome(event.target.value);
         }}
         id="nome"
         label="Nome"
         variant="outlined"
-        fullWidth
         margin="normal"
+        fullWidth
       />
       <TextField
         value={sobrenome}
-        onChange={(e) => {
-          setSobrenome(e.target.value);
+        onChange={(event) => {
+          setSobrenome(event.target.value);
         }}
         id="sobrenome"
         label="Sobrenome"
         variant="outlined"
-        fullWidth
         margin="normal"
+        fullWidth
       />
       <TextField
         value={cpf}
-        onChange={(e) => {
-          setCpf(e.target.value);
+        onChange={(event) => {
+          setCpf(event.target.value);
         }}
-        onBlur={(e) => {
+        onBlur={(event) => {
           const ehValido = validarCPF(cpf);
-          setErros({
-            cpf: ehValido,
-          });
+          setErros({ cpf: ehValido });
         }}
         error={!erros.cpf.valido}
         helperText={erros.cpf.texto}
-        id="cpf"
+        id="CPF"
         label="CPF"
         variant="outlined"
-        fullWidth
         margin="normal"
+        fullWidth
       />
 
       <FormControlLabel
@@ -64,10 +61,10 @@ export function DadosPessoais({ aoEnviar, validarCPF }) {
         control={
           <Switch
             checked={promocoes}
-            onChange={(e) => {
-              setPromocoes(e.target.checked);
+            onChange={(event) => {
+              setPromocoes(event.target.checked);
             }}
-            name="Promoções"
+            name="promocoes"
             color="primary"
           />
         }
@@ -78,16 +75,16 @@ export function DadosPessoais({ aoEnviar, validarCPF }) {
         control={
           <Switch
             checked={novidades}
-            onChange={(e) => {
-              setNovidades(e.target.checked);
+            onChange={(event) => {
+              setNovidades(event.target.checked);
             }}
-            name="Novidades"
+            name="novidades"
             color="primary"
           />
         }
       />
 
-      <Button variant="contained" color="primary" type="submit">
+      <Button type="submit" variant="contained" color="primary">
         Cadastrar
       </Button>
     </form>
