@@ -3,6 +3,7 @@ import { FormularioCadastro } from './components/FormularioCadastro';
 import { Container, Typography } from '@material-ui/core';
 
 import { validarCPF, validarSenha } from './models/cadastro';
+import ValidacoesCadastro from './context/ValidacoesCadastro';
 
 function App() {
   return (
@@ -10,10 +11,11 @@ function App() {
       <Typography variant="h3" component="h1" align="center">
         Formulario Cadastro
       </Typography>
-      <FormularioCadastro
-        onSubmit={onSubmitForm}
-        validacoes={{ cpf: validarCPF, senha: validarSenha }}
-      />
+      <ValidacoesCadastro.Provider
+        value={{ cpf: validarCPF, senha: validarSenha, nome: validarSenha }}
+      >
+        <FormularioCadastro onSubmit={onSubmitForm} />
+      </ValidacoesCadastro.Provider>
     </Container>
   );
 }
