@@ -4,6 +4,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - [React](https://reactjs.org)
 - [Material-UI](https://v4.mui.com/pt/)
+- [React-Hooks](https://reactjs.org/docs/hooks-intro.html)
 
 ## 🚀 Como executar
 
